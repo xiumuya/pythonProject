@@ -19,7 +19,6 @@ for it in result:
     with open('some_movies.txt', 'a', encoding='utf-8') as f:
         print(it.group('net'))
         print(it.group('name'),file=f)
-        # f.write(pprint.pformat(it.groupdict().values()))
         time.sleep(0.2)
         newurl= url +it.group('net')
         resp1=requests.get(newurl,verify=False)

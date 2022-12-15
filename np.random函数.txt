@@ -1,0 +1,20 @@
+np.random模块
+1.np.random.choice(a, size=None, replace=True, p=None)
+
+2. np.random.rand(d0, d1, ..., dn)
+产生维度为(d0, d1, ..., dn)，值属于[0,1)的正太分布
+
+
+3. np.random.randint(low, high=None, size=None, dtype='l'))
+产生属于[low,high)的size数量的离散均匀分布，默认数据类型为np.int。
+如果high为None，则产生属于[0,low)的离散均匀分布
+size值可以为数值(产生结果为一维)，也可以为list或者tuple(产生结果为二维或者多维)
+
+
+4. np.random.randn(d0, d1, ..., dn)
+产生维度为(d0, d1, ..., dn)的标准正太分布。同np.random.standard_uniform()，这两个函数功能相同，只是参数写法不同
+标准正态分布又称为u分布，是以0为均数、以1为标准差的正态分布(mean=0, stdev=1)，记为N（0，1）
+
+
+5. np.random.random(size=None)
+产生属于[0.0, 1.0)的size数量的连续均匀分布。size为list或者tuple时，产生相应维度的结果。

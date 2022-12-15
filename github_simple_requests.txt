@@ -1,0 +1,12 @@
+git init 初始化
+git remote -v 查看是否链接过github 远程仓库
+git remote rm origin
+git remote add origin (远程仓库地址)
+git clone (远程仓库地址)
+git add (文件名) 上传选中的文件
+git add . 一次性上传文件夹所有文件
+git branch 查看所有分支
+git branch (分支名) 创建分支
+git checkout (分支名称) 创建并切换到分支
+git commit -m "注释" 提交
+git push -u origin (分支名称) 上传

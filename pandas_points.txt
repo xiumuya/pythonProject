@@ -1,0 +1,131 @@
+一.排序
+(1)df.sort_index
+通过axis参数指定对行索引还是对列索引,ascending=True表示升序,也是默认
+(2)df.sort_values
+相比于df.sort_index,多了一个参数by,接收字符串或者列表，来指定要按谁排序
+例如:df.sort_values(by='age')
+    df.sort_values(by=['age','gender'],ascending=[Ture,False])
+排完序之后，可以通过 dataframe.reset.index(drop=True)来重新设置一下行索引,如果不设定会多出一列index
+
+
+
+二.查看数据
+(1)head()
+返回前 n 行数据，默认显示前5行数据。
+(2)tail()
+返回后 n 行数据,默认显示后5行数据。
+(3)shift()
+移动行或列,如果想要移动 DataFrame 中的某一行/列，可以使用 shift() 函数实现。
+它提供了一个periods参数，该参数表示在特定的轴上移动指定的步幅。
+shif() 函数的语法格式如下：
+DataFrame.shift(periods=1, freq=None, axis=0)
+
+
+
+
+三.pd.set_option    行和列默认值显示上限是（60，20）。
+(1) 显示所有列
+pd.set_option('display.max_columns', None)
+(2 )显示所有行
+pd.set_option('display.max_rows', None)
+(3)显示小数位数
+pd.set_option('display.float_format',lambda x: '%.2f'%x) #两位
+(4)显示宽度
+pd.set_option('display.width', 100)
+(5)处理一些中文列名与数据对不齐的情况
+pd.set_option('display.width', 100)   # pandas设置显示宽度
+pd.set_option('display.unicode.ambiguous_as_wide', True)
+pd.set_option('display.unicode.east_asian_width', True)
+
+(6)pd.set_option('precision', 1)   # 设置显示数值的精度
+
+
+
+四.使用自定义函数
+(1)pipe()
+通过给 pipe() 函数传递一个自定义函数和适当数量的参数值，从而操作 DataFrme 中的所有元素。
+(2)apply()
+操作DataFrame 的某一行或者某一列
+该方法与描述性统计方法类似，都有可选参数 axis，并且默认按列操作。
+(3))默认保留第一次出现的重复项
+df.drop_duplicates()
+(4)删除所有重复项
+df.drop_duplicates(keep=False)
+
+
+五.pd.cut()参数介绍
+pd.cut( x, bins, right=True, labels=None,
+retbins=False, precision=3, include_lowest=False, duplicates='raise', )
+bins：定义分割的bin边。
+right ：(布尔值，默认为True)指示箱子是否包括最右边。如果right == True(默认值)，则箱子[1、2、3、4]表示(1,2]，(2,3]，(3,4]。
+labels: (数组或布尔值，可选)指定返回的容器的标签。必须与生成的箱子长度相同。如果为False，则仅返回箱子的整数指示符。
+retbins ：(布尔型，默认为False)是否返回箱子。当垃圾桶作为标量提供时很有用。
+
+
+
+
+
+六.Pandas统计函数
+Series 和 DatFrames 都可以使用 pct_change() 函数。
+该函数将每个元素与其前一个元素进行比较，并计算前后数值的百分比变化。
+协方差
+(1)Series对象
+Series 对象提供了一个cov方法用来计算 Series 对象之间的协方差。同时，该方法也会将缺失值(NAN )自动排除。
+ser1.cov(ser2)
+(2)Dataframe对象
+当应用于 DataFrame 时，协方差（cov）将计算所有列之间的协方差。
+frame["a"].cov(frame["b"])
+..........
+df.describe()
+
+
+
+
+七.重置索引
+(1)df.reindex
+df.reindex(index=[],columns=[])
+(2)df.rename()
+使用某些映射(dict或Series)或任意函数来对行、列标签重新命名，
+例如:df.rename(columns={"col1":"c1","col2":"c2"},index={"apples":"a1,})
+(3)reindex_like()
+有 a、b 两个 DataFrame 对象，
+可以使用 reindex_like() 方法让 a 的行索引与 b 相同，
+reindex_like() 提供了一个可选的参数method，使用它来填充相应的元素值，参数值介绍如下：
+pad/ffill：向前填充值；
+bfill/backfill：向后填充值；
+nearest：从距离最近的索引值开始填充。
+reindex_like() 还提供了一个额外参数 limit，该参数用来控制填充的最大行数。
+
+八.处理缺失值
+(1)dropna(axis="rows/columns"  thresh=)剔除缺失值
+(2)fiilna(method="ffill/bfill")填充缺失值,从前往后/从后往前填充
+(3)fill_value 参数不仅可以填充缺失值，还也可以对原数据进行替换
+
+
+九.合并数据集
+(1).pd.concat()
+处理索引重复的方法
+1.pd.concat([x,y],ignore_index=True)#忽略索引
+2.pd.concat([x,y],keys=["x","y"])#增加多级索引
+
+(2)append方法
+df1.append(df2)
+
+(3).pd.merge()一对一,多对一,多对多
+(a).设置合并的键 on=[,]#如果列完全一样
+合并列名不同的数据集
+left_on,right_on
+(b).合并索引
+left_index=True/False
+right_index=True/False
+(c)join()
+按照索引进行合并
+df1.join(df2)
+(d)参数how
+how="inner"  内连接,交集
+how="outer"  外连接,并集
+how="left"   左连接,只包含左列
+how="right"  右连接,只包含右列
+(4)suffixes参数
+如果有重复的列名,而数据又不一样
+pd.merge(df1,df2,on="name",suffixes['_x',"_y"])#为重复的列添加后缀名

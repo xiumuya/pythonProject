@@ -1,0 +1,51 @@
+Image对象属性
+1) size：查看图像的尺寸
+2) format：查看图片的格式
+3) readonly：图片是否为只读
+4) info：查看图片相关信息
+5) mode：图像模式
+
+
+open()
+使用 Image 类的 open() 方法，可以创建一个 Image 对象，语法格式如下：
+im = Image.open(fp,mode="r")
+参数说明：
+fp：即 filepath 的缩写，表示文件路径，字符串格式；
+mode：可选参数，若出现该参数，则必须设置为 "r"，否则会引发 ValueError 异常。
+
+
+thumbnail()
+缩略图（thumbnail image）指的是将原图缩小至一个指定大小（size）的图像。
+thumbnail(size,resample)
+
+
+split()
+r,g,b = image.split()
+
+merge()
+Image.merge(mode, bands)
+mode：指定输出图片的模式
+mode	描述
+1	    1 位像素（取值范围 0-1），0表示黑，1 表示白，单色通道。
+L	    8 位像素（取值范围 0 -255），灰度图，单色通道。
+P	    8 位像素，使用调色板映射到任何其他模式，单色通道。
+RGB	    3 x 8位像素，真彩色，三色通道，每个通道的取值范围 0-255。
+RGBA	4 x 8位像素，真彩色+透明通道，四色通道。
+CMYK	4 x 8位像素，四色通道，可以适应于打印图片。
+YCbCr	3 x 8位像素，彩色视频格式，三色通道。
+LAB	    3 x 8位像素，L * a * b颜色空间，三色通道
+HSV	    3 x 8位像素，色相，饱和度，值颜色空间，三色通道。
+I	    32 位有符号整数像素，单色通道。
+F	    32 位浮点像素，单色通道。
+
+bands：参数类型为元组或者列表序列，其元素值是组成图像的颜色通道，比如 RGB 分别代表三种颜色通道，可以表示为 (r,g,b)。
+
+blend()
+混合 RGBA 模式的图片（PNG 格式）
+Image.blend(image1,image2, alpha)
+参数说明如下：
+image1，image2：表示两个 Image 对象。
+alpha：表示透明度，取值范围为 0 到 1，
+当取值为 0 时，输出图像相当于 image1 的拷贝，
+而取值为 1 时，则是 image2 的拷贝，
+只有当取值为 0.5 时，才为两个图像的中合。因此改值的大小决定了两个图像的混合程度。
