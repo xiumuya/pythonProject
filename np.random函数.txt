@@ -17,4 +17,5 @@ size值可以为数值(产生结果为一维)，也可以为list或者tuple(产�
 
 
 5. np.random.random(size=None)
+
 产生属于[0.0, 1.0)的size数量的连续均匀分布。size为list或者tuple时，产生相应维度的结果。

@@ -6,6 +6,7 @@ Image对象属性
 5) mode：图像模式
 
 
+
 open()
 使用 Image 类的 open() 方法，可以创建一个 Image 对象，语法格式如下：
 im = Image.open(fp,mode="r")
