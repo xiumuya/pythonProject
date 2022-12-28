@@ -1,0 +1,5 @@
+python -m pip install scrapy #下载
+cd path
+scrapy startproject name
+cd name\name\spider\
+scrapy genspider pyname 域名  #不需要加协议

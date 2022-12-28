@@ -1,0 +1,24 @@
+a=np.arange(30).reshape(5,6)
+point1
+max_number=np.argmax(a)#返回最大数的索引
+
+
+point2#好用
+#merhod1  贼好用
+print(np.unravel_index(max_number,a.shape()))#传入两个参数：需要查找的数字和数组的shape
+
+
+method2
+for k,v in np.ndenumerate(a):#一维以上的numpy数组不能用enumerate,但是有np.ndenumerate（）函数
+    if v==10:
+        print(k)
+......................
+
+
+point3
+print(np.argsort(a,axis=0))#默认是axis=-1,意思是按照最后一个维度排序
+
+
+point4#比较鸡肋
+np.ndindex(shape)
+

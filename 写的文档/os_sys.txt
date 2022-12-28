@@ -1,0 +1,69 @@
+模块sys
+1.sys.argv
+“argv”即“argument value”的简写，是一个列表对象
+其中存储的是在命令行调用 Python 脚本时提供的“命令行参数”。
+
+
+2.sys.executable    相当于 where python
+该属性是一个字符串
+在正常情况下，其值是当前运行的 Python 解释器对应的可执行程序所在的绝对路径。
+
+3.sys.stdout
+#有趣的例子
+import sys,time
+for i in range(30):
+    sys.stdout.write("█")
+    time.sleep(0.1)
+    sys.stdout.flush()  # 刷新显示到屏幕上
+'''输出内容
+██████████████████████████████
+'''
+
+
+4.sys.getrecursionlimit() 和 sys.setrecursionlimit()
+sys.getrecursionlimit()
+可以获取 Python 的最大递归数目，
+sys.setrecursionlimit()
+可以设置最大递归数目。
+
+
+
+模块os
+1.os.getcwd()：返回当前工作目录
+
+
+2、os.listdir(path=".")：返回文件夹下所有文件名
+这个函数以列表的形式返回path下的所有文件的文件名，如果path不指定，则返回当前目录下的。
+
+
+3、os.mkdir(path)：创建文件夹
+当文件已存在时，无法创建该文件。
+
+
+4、os.replace(src, dst)：重命名或替换文件
+将文件或者文件夹src重命名为dst。如果dst已经存在且为文件，则会使用dst替换src文件。
+注意：src为就文件(夹)路径，dst为新文件(夹)路径
+
+5、os.rmdir(path)：删除一个文件
+
+6.os.walk(path)：遍历获取所有下级文件和文件的文件名
+这个函数可以以多个列表的形式返回path下面所有文件和文件夹的名字。
+#区别os.lisdir(),多返回文件夹的名字，且返回的是一个 generator 需要使用for in
+
+os.path
+1.os.path.abspath(path)：返回绝对路径
+使用这个函数可以获得path的绝对路径字符串。
+
+2、os.path.dirname(path)：返回文件夹名称
+返回path所在的文件夹的名称#上一级
+
+3、os.path.exists(path)：检查文件或文件夹是否存在，返回True/False
+
+4、os.path.getsize(path)：返回文件/文件夹的大小，以字节为单位
+返回path的大小，以字节为单位。
+
+5、os.path.isabs(path)：判断路径是否是一个绝对路径，返回True/False
+
+6、os.path.isfile(path)：判断是否是一个文件，返回True/False
+
+7、os.path.isdir(path)：判断是否是一个文件夹，返回True/False

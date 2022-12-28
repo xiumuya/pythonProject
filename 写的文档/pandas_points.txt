@@ -76,12 +76,25 @@ ser1.cov(ser2)
 当应用于 DataFrame 时，协方差（cov）将计算所有列之间的协方差。
 frame["a"].cov(frame["b"])
 ..........
-df.describe()
+df.describe()#描述性统计var,std和类似box图的东西
 
 
 
 
 七.重置索引
+补充：
+import pandas as pd
+a=pd.DataFrame({'a':[1,2],'b':[2,3]})
+a.index=[2,3]#修改index不一定要用reindex，但是速度说不准谁快
+print(a.values)
+print(a)
+'''a  b
+2  1  2
+3  2  3
+
+'''
+
+
 (1)df.reindex
 df.reindex(index=[],columns=[])
 (2)df.rename()
