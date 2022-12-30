@@ -21,8 +21,6 @@ shif() 函数的语法格式如下：
 DataFrame.shift(periods=1, freq=None, axis=0)
 
 
-
-
 三.pd.set_option    行和列默认值显示上限是（60，20）。
 (1) 显示所有列
 pd.set_option('display.max_columns', None)
@@ -33,7 +31,6 @@ pd.set_option('display.float_format',lambda x: '%.2f'%x) #两位
 (4)显示宽度
 pd.set_option('display.width', 100)
 (5)处理一些中文列名与数据对不齐的情况
-pd.set_option('display.width', 100)   # pandas设置显示宽度
 pd.set_option('display.unicode.ambiguous_as_wide', True)
 pd.set_option('display.unicode.east_asian_width', True)
 
@@ -41,16 +38,31 @@ pd.set_option('display.unicode.east_asian_width', True)
 
 
 
-四.使用自定义函数
-(1)pipe()
-通过给 pipe() 函数传递一个自定义函数和适当数量的参数值，从而操作 DataFrme 中的所有元素。
-(2)apply()
-操作DataFrame 的某一行或者某一列
-该方法与描述性统计方法类似，都有可选参数 axis，并且默认按列操作。
-(3))默认保留第一次出现的重复项
+四.
+
+(1)默认保留第一次出现的重复项
 df.drop_duplicates()
-(4)删除所有重复项
+(2)删除所有重复项
 df.drop_duplicates(keep=False)
+(3)  df.column.mean()
+(4)   df.column.tolist()  #转换为列表
+(5)  df.shape  #属性  查看df的行数和列数
+(6)  布尔掩码
+df[(df['b']<4)&(df['b']>2)]
+(7)dorp()  批量不考虑用
+df.drop(index=len(df)-1,inplace=True)
+#(8) append   #append没了，留个纪念
+row={'':'','':''}
+df.append(row,ignore_index=True)
+(9)  增加数据   批量concat
+Ⅰ.df.iloc[-1]=[1,2]
+
+Ⅱ.map的使用
+df['new_column']=df['column'].map(func)
+df['new_column']=df['column'].map(dict)#映射0
+To avoid applying the function to missing values (and keep them as NaN) na_action='ignore' can be used:
+
+
 
 
 五.pd.cut()参数介绍
@@ -75,8 +87,23 @@ ser1.cov(ser2)
 (2)Dataframe对象
 当应用于 DataFrame 时，协方差（cov）将计算所有列之间的协方差。
 frame["a"].cov(frame["b"])
-..........
-df.describe()#描述性统计var,std和类似box图的东西
+
+(3)df.describe()#描述性统计var,std和类似box图的东西
+
+
+(4) df.value_count   #用来统计某列出现的次数
+def value_counts(self,
+                 normalize: bool = False,
+                 sort: bool = True,
+                 ascending: bool = False,
+                 bins: Any = None,
+                 dropna: bool = True) -> Series
+例子:
+import pandas as pd
+df=pd.DataFrame({'a':['python','java','python','c#','c','javascript']})
+print(df['a'].value_counts(dropna=True,normalize=True))
+
+
 
 
 
@@ -113,7 +140,21 @@ reindex_like() 还提供了一个额外参数 limit，该参数用来控制填�
 (1)dropna(axis="rows/columns"  thresh=)剔除缺失值
 (2)fiilna(method="ffill/bfill")填充缺失值,从前往后/从后往前填充
 (3)fill_value 参数不仅可以填充缺失值，还也可以对原数据进行替换
+(4) interpolate
+Pandas dataframe.interpolate()
+用法： DataFrame.interpolate(method=’linear’, axis=0, limit=None,
+inplace=False, limit_direction=’forward’, limit_area=None, downcast=None, **kwargs)
 
+参数：
+method:{“线性”，“时间”，“索引”，“值”，“最近”，“零”，“线性”，“二次”，“三次”，“重心”，“克罗格”，“多项式”，“样条”，“ piecewise_polynomial”，“ from_derivatives”，“ pchip”，“ akima”}
+
+axis:0填充column-by-column和1填充row-by-row。
+limit:要填充的连续NaN的最大数量。必须大于0。
+limit_direction:{“前进”，“后退”，“两者”}，默认为“前进”
+limit_area:无(默认)无填充限制。inside 仅填充有效值包围的NaN(内插)。outside 仅将NaN填充到有效值之外(外推)。如果指定了限制，则将沿该方向填充连续的NaN。
+inplace:如果可能，更新df。
+downcast:如果可能，请向下转换dtypes。
+kwargs:关键字参数传递给插值函数。
 
 九.合并数据集
 (1).pd.concat()
@@ -126,8 +167,15 @@ df1.append(df2)
 
 (3).pd.merge()一对一,多对一,多对多
 (a).设置合并的键 on=[,]#如果列完全一样
-合并列名不同的数据集
+合并列名不同(value相同,不考虑排列的顺序)的数据集
 left_on,right_on
+可以使用drop去除某列
+例子：
+pd.merge(df1,df2,left_on='',right_on='').drop(column_name,axis=0/1')
+drop方法
+DataFrame.drop(labels=None, axis=0, index=None, columns=None, level=None, inplace=False, errors='raise')
+
+
 (b).合并索引
 left_index=True/False
 right_index=True/False
