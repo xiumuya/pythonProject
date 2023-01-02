@@ -62,7 +62,8 @@ df['new_column']=df['column'].map(func)
 df['new_column']=df['column'].map(dict)#映射0
 To avoid applying the function to missing values (and keep them as NaN) na_action='ignore' can be used:
 
-
+(10)groupby()
+df.groupby('column_name')
 
 
 五.pd.cut()参数介绍
@@ -72,7 +73,7 @@ bins：定义分割的bin边。
 right ：(布尔值，默认为True)指示箱子是否包括最右边。如果right == True(默认值)，则箱子[1、2、3、4]表示(1,2]，(2,3]，(3,4]。
 labels: (数组或布尔值，可选)指定返回的容器的标签。必须与生成的箱子长度相同。如果为False，则仅返回箱子的整数指示符。
 retbins ：(布尔型，默认为False)是否返回箱子。当垃圾桶作为标量提供时很有用。
-
+#某些情况可以用df.map()代替
 
 
 
@@ -102,7 +103,7 @@ def value_counts(self,
 import pandas as pd
 df=pd.DataFrame({'a':['python','java','python','c#','c','javascript']})
 print(df['a'].value_counts(dropna=True,normalize=True))
-
+normalize   正规化，其值在0-1之间
 
 
 
@@ -162,8 +163,8 @@ kwargs:关键字参数传递给插值函数。
 1.pd.concat([x,y],ignore_index=True)#忽略索引
 2.pd.concat([x,y],keys=["x","y"])#增加多级索引
 
-(2)append方法
-df1.append(df2)
+#(2)append方法
+#df1.append(df2)
 
 (3).pd.merge()一对一,多对一,多对多
 (a).设置合并的键 on=[,]#如果列完全一样
@@ -190,3 +191,17 @@ how="right"  右连接,只包含右列
 (4)suffixes参数
 如果有重复的列名,而数据又不一样
 pd.merge(df1,df2,on="name",suffixes['_x',"_y"])#为重复的列添加后缀名
+
+
+十.交换两列数据
+
+就地修改
+df['a'],df['b']=df['b'],df['a']
+df.rename({'a':'b','b':'a'})
+print(df)
+
+只保留两列数据
+cols=df.columns[[1,0]]
+# print(cols)
+df=df[cols]
+print(df)
