@@ -1,0 +1,29 @@
+1.time.ctime()
+print(time.ctime())
+Thu Jan  5 15:11:11 2023
+
+2.time.strftime()
+%a      本地（locale）     简化星期名称
+
+%A      本地完整星期名称
+
+%b      本地简化月份名称
+
+%B     本地完整月份名称
+print(time.strftime('%m%d',time.localtime()))
+3.time.localtime()
+time.struct_time(tm_year=2023, tm_mon=1, tm_mday=5, tm_hour=15, tm_min=14, tm_sec=38, tm_wday=3, tm_yday=5, tm_isdst=0)
+4.time.time()
+1672902915.9850974
+
+random.seed(time.time())
+
+
+5.time.perf_counter()  #计时,也可用time.time()
+start_time=time.perf_counter()
+end_time=time.perf_counter()
+print(end_time-start_time)
+
+
+6.time.sleep()
+
