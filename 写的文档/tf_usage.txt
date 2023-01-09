@@ -1,0 +1,102 @@
+tf.constant(,dtype=)   #dtype, 默认为tf.int32,tf.float32
+数据可以是一个numpy数组，也可以是一个标量，也可以是一个字符串
+
+tf.cast(a,dtype='')   转换精度
+
+.numpy()得到对应的数组
+
+ta=tf.convert_to_tensor(a)   返回一个tf对象
+
+
+tf.zeros(shape=,dtype=),tf.ones(shape=,dtype=)
+
+创建元素都相同的张量
+(1)tf.fill(dims,value)
+#tf.fill([2,3],value=5)
+(2)tf.constant(value,shape=())
+
+tf.random.normal(shape,mean=,  stddev=)#正态分布,shape=[]
+
+tf.random_truncated_normal(shape.mean,stddev,dtype)  #返回一个截断的正态分布，截断的标准是两倍的标准差
+范围=[mean+-2stddev]
+
+
+#设置随机数种子
+tf.random.set_seed()
+
+tf.random.uniform(shape,minval,maxval,dtype)  #均匀分布,shape=()
+
+tf.random.shuffle([tf,ndarray,list])  #随机打乱第一维
+
+
+#创建序列
+tf.range(start,limit,delta,dtype) delta默认为1 ,start默认为0,
+
+#变换维度
+
+tf.shape=(2,)
+tf.expand_dims(tf,0)      #在aixs=0上增加维度    shape=(1,2)
+tf.expand_dims(tf,1)      #在aixs=1上增加维度shape=(2,1)
+tf.expand_dims(tf,-1)      #在下一维上增加维度shape=(2,1)
+..............................
+tf.reshape(tf,[])
+
+
+#删除维度     #只能删除长度为1的维度
+tf.squeeze(input,axis=None)
+
+
+#交换维度
+tf.transpose(a,perm)  perm=[1,0],改变轴的顺序
+
+
+#拼接和分割   只会改变张量的视图,储存顺序并没有改变
+拼接
+tf.concat([],axis=)
+
+分割
+tf.split(value,num_or_size_splits,axis=0)
+分割方案
+num   等长分割,分割为num份
+size=[1:2:1]    分割为三个张量,长度分别为1,2,1
+
+
+堆叠和分解
+
+堆叠
+tf.stack(values,axis)  values(tf1,tf2)
+分解
+tf.unstack(tf,axis)
+
+
+#张量运算
+
+
+
+#广播机制
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
