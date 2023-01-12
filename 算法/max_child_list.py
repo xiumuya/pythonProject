@@ -2,30 +2,32 @@
 #求最大的子序列,写出起始位置和终止位置，假设序列中的元素有正数
 import random
 import time
+lst=[random.uniform(-1,1) for i in range(1000000)]#生成[-1,1]均匀分布的列表,绝大多数时候，列表中有大于0的数
 
 # random.seed(0)
 #method1
-lst=[random.uniform(-1,1) for i in range(10000)]#生成[-1,1]均匀分布的列表,绝大多数时候，列表中有大于0的数
-sum_max=0
-a=0
-b=0
-start=time.perf_counter()
-for i in range(len(lst)):
-    sum=0
-    for k in range(i,len(lst)):
-        sum+=lst[k]
-        # if sum<0:减少不必要的计算
-        #     continue   反向优化，耗用的时间还多1s左右
-
-        if sum_max<sum:
-            sum_max=sum
-            a=i+1
-            b=k+1#自动更新,要最后一次
-end=time.perf_counter()
-print(sum_max)
-print('start:{} end:{} time:{}'.format(a,b,end-start))
-print('-----------------------')
+# sum_max=0
+# a=0
+# b=0
+# start=time.perf_counter()
+# for i in range(len(lst)):
+#     sum=0
+#     for k in range(i,len(lst)):
+#         sum+=lst[k]
+#         # if sum<0:减少不必要的计算
+#         #     continue   反向优化，耗用的时间还多1s左右
+#
+#         if sum_max<sum:
+#             sum_max=sum
+#             a=i+1
+#             b=k+1#自动更新,要最后一次
+# end=time.perf_counter()
+# print(sum_max)
+# print('start:{} end:{} time:{}'.format(a,b,end-start))
+# print('-----------------------')
 #method2
+end=time.perf_counter()
+
 sum1=0
 sum_max1=0
 q=0
@@ -58,7 +60,7 @@ end2=time.perf_counter()
 print(sum_max1)
 print("start:",len(lst)-p+1,'end:',q+1,'time:',end2-end)
 
-
+# method3
 def linear_find_max_subarray(array):
     '''
     线性时间复杂度查找最大子数组
@@ -81,6 +83,26 @@ def linear_find_max_subarray(array):
         j += 1
     return left+1,right+1, max_sum
 print(linear_find_max_subarray(lst))
+
+# method4
+sum1=0
+# print(lst)
+sum_max1=0
+p=0
+q=0
+left=p
+
+for right in range(len(lst)):
+    sum1+=lst[right]
+    if sum1 < 0:
+        sum1 = 0
+        left=right+1
+    if sum_max1<sum1:
+        sum_max1 = sum1
+        p=left
+        q=right
+print(p+1,q+1,sum_max1)
+
 
 
 
